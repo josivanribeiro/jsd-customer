@@ -1,9 +1,16 @@
+/* Copyright josivanSilva (Developer); 2018 */
 package com.josivansilva.domain;
 
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
+/**
+ * Common customer entity class.
+ * 
+ * @author josivan@josivansilva.com
+ *
+ */
 @Entity(name = "CommonCustomer")
 @DiscriminatorValue("Common")
 public class CommonCustomer extends Customer {

@@ -1,3 +1,4 @@
+/* Copyright josivanSilva (Developer); 2018 */
 package com.josivansilva.domain;
 
 import java.io.Serializable;
@@ -12,6 +13,12 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 
+/**
+ * Customer entity class.
+ * 
+ * @author josivan@josivansilva.com
+ *
+ */
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "customer_type")

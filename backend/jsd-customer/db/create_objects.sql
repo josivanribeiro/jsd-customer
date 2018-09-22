@@ -1,7 +1,7 @@
 CREATE DATABASE IF NOT EXISTS josivansilva;
 
 CREATE  TABLE josivansilva.customer ( 
-customer_id INT NOT NULL ,
+customer_id INT NOT NULL AUTO_INCREMENT,
 customer_type VARCHAR(10) NOT NULL,
 customer_name VARCHAR(255) NOT NULL ,
 customer_monthly_income NUMERIC(10,2) ,

@@ -24,12 +24,25 @@ public class CustomerRepository {
 	private static final EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory ("josivansilva");
 	
 	/**
+	 * Singleton class by Eager Initialization
+	 */
+	public static CustomerRepository SINGLETON = new CustomerRepository();
+	
+	/**
+	 * Private constructor.
+	 */
+	private CustomerRepository () {
+		
+	}
+	
+	/**
 	 * Inserts a new customer.
 	 * 
 	 * @param customer the customer.
 	 */
-	public void insert (Customer customer) {
-        // Create an EntityManager
+	public boolean insert (Customer customer) {
+        boolean isInserted = false;
+		// Create an EntityManager
         EntityManager manager = entityManagerFactory.createEntityManager();
         EntityTransaction transaction = null;
 
@@ -44,6 +57,7 @@ public class CustomerRepository {
             
             // Commit the transaction
             transaction.commit();
+            isInserted = true;
         } catch (Exception ex) {
             // If there are any exceptions, roll back the changes
             if (transaction != null) {
@@ -55,6 +69,7 @@ public class CustomerRepository {
             // Close the EntityManager
             manager.close();
         }
+        return isInserted;
     }
 	
 	/**
@@ -62,8 +77,9 @@ public class CustomerRepository {
 	 * 
 	 * @param customer the customer.
 	 */
-	public static void update (Customer customer) {
-        // Create an EntityManager
+	public boolean update (Customer customer) {
+        boolean isUpdated = false;
+		// Create an EntityManager
         EntityManager manager = entityManagerFactory.createEntityManager();
         EntityTransaction transaction = null;
 
@@ -119,6 +135,7 @@ public class CustomerRepository {
 
             // Commit the transaction
             transaction.commit();
+            isUpdated = true;
         } catch (Exception ex) {
             // If there are any exceptions, roll back the changes
             if (transaction != null) {
@@ -130,6 +147,7 @@ public class CustomerRepository {
             // Close the EntityManager
             manager.close();
         }
+        return isUpdated;
     }
 	
 	/**
@@ -137,8 +155,9 @@ public class CustomerRepository {
 	 * 
 	 * @param customer the customer.
 	 */
-	public static void delete (Customer customer) {
-        // Create an EntityManager
+	public boolean delete (Customer customer) {
+        boolean isDeleted = false;
+		// Create an EntityManager
         EntityManager manager = entityManagerFactory.createEntityManager();
         EntityTransaction transaction = null;
 
@@ -156,6 +175,7 @@ public class CustomerRepository {
 
             // Commit the transaction
             transaction.commit();
+            isDeleted = true;
         } catch (Exception ex) {
             // If there are any exceptions, roll back the changes
             if (transaction != null) {
@@ -167,6 +187,7 @@ public class CustomerRepository {
             // Close the EntityManager
             manager.close();
         }
+        return isDeleted;
 	}
 	
 	public List<Customer> findAll() {

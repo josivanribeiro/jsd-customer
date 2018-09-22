@@ -19,7 +19,7 @@ import javax.persistence.InheritanceType;
  * @author josivan@josivansilva.com
  *
  */
-@Entity
+@Entity (name = "customer")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "customer_type")
 public class Customer implements Serializable {
@@ -34,7 +34,7 @@ public class Customer implements Serializable {
     @Column(name = "customer_id", unique = true)
     private int customerId;
 	
-	@Column(name = "customer_type")
+	@Column(name = "customer_type", insertable = false, updatable = false)
 	private String customerType;
 	
 	@Column(name = "customer_name")

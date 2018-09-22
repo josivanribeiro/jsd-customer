@@ -2,7 +2,7 @@ CREATE DATABASE IF NOT EXISTS josivansilva;
 
 CREATE  TABLE josivansilva.customer ( 
 customer_id INT NOT NULL ,
-customer_type INT NOT NULL ,
+customer_type VARCHAR(10) NOT NULL,
 customer_name VARCHAR(255) NOT NULL ,
 customer_monthly_income NUMERIC(10,2) ,
 customer_risk CHAR(1) NOT NULL ,

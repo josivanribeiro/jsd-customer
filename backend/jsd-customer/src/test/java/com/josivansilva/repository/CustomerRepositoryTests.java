@@ -1,9 +1,11 @@
 /* Copyright josivanSilva (Developer); 2018 */
 package com.josivansilva.repository;
 
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -11,6 +13,7 @@ import javax.persistence.Persistence;
 import org.junit.Test;
 
 import com.josivansilva.domain.CommonCustomer;
+import com.josivansilva.domain.Customer;
 import com.josivansilva.domain.PotentialCustomer;
 import com.josivansilva.domain.SpecialCustomer;
 
@@ -27,7 +30,7 @@ public class CustomerRepositoryTests {
 
 	private CustomerRepository customerRepository = CustomerRepository.SINGLETON; 
 	
-	//@Test
+	@Test
 	public void testInsertSpecialCustomer () {
 		SpecialCustomer specialCustomer = new SpecialCustomer ();
 		specialCustomer.setCustomerName("Josivan Ribeiro da Silva");
@@ -40,7 +43,7 @@ public class CustomerRepositoryTests {
 		assertTrue (customerRepository.insert (specialCustomer));		
 	}
 	
-	//@Test
+	@Test
 	public void testInsertPotentialCustomer () {
 		PotentialCustomer potentialCustomer = new PotentialCustomer ();
 		potentialCustomer.setCustomerName("Maria Nazaré");
@@ -52,7 +55,7 @@ public class CustomerRepositoryTests {
 		assertTrue (customerRepository.insert (potentialCustomer));
 	}
 	
-	//@Test
+	@Test
 	public void testInsertCommonCustomer () {
 		CommonCustomer commonCustomer = new CommonCustomer ();
 		commonCustomer.setCustomerName("Antonieta Ribeiro");
@@ -64,7 +67,7 @@ public class CustomerRepositoryTests {
 		assertTrue (customerRepository.insert (commonCustomer));
 	}
 	
-	//@Test
+	@Test
 	public void testUpdateCommonCustomer () {
 		CommonCustomer commonCustomer = new CommonCustomer ();
 		commonCustomer.setCustomerId (3);
@@ -77,7 +80,7 @@ public class CustomerRepositoryTests {
 		assertTrue (customerRepository.update (commonCustomer));
 	}
 	
-	//@Test
+	@Test
 	public void testUpdatePotentialCustomer () {
 		PotentialCustomer potentialCustomer = new PotentialCustomer ();
 		potentialCustomer.setCustomerId (2);
@@ -102,6 +105,24 @@ public class CustomerRepositoryTests {
 		specialCustomer.setCustomerAddress("Rua Albion, 255, Apto. 12, Bloco A.");
 				
 		assertTrue (customerRepository.update (specialCustomer));		
+	}
+	
+	@Test
+	public void testDeleteCustomer () {
+		SpecialCustomer specialCustomer = new SpecialCustomer ();
+		specialCustomer.setCustomerId(1);
+		
+		assertTrue (customerRepository.delete (specialCustomer));		
+	}
+	
+	@Test
+	public void testFindAllCustomer () {
+		List<Customer> customerList = null;
+		
+		customerList = customerRepository.findAll();
+		
+		assertNotNull (customerList);
+		assertTrue (customerList.size() > 0);
 	}
 	
 }

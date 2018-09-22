@@ -205,7 +205,7 @@ public class CustomerRepository {
             transaction.begin();
 
             // Get a List of Customers
-            customerList = manager.createQuery ("SELECT obj FROM Customer obj", Customer.class).getResultList();
+            customerList = manager.createQuery ("SELECT obj FROM customer obj", Customer.class).getResultList();
 
             // Commit the transaction
             transaction.commit();

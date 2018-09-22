@@ -190,6 +190,43 @@ public class CustomerRepository {
         return isDeleted;
 	}
 	
+	/**
+	 * Finds a customer by id.
+	 * 
+	 * @param customer the customer.
+	 */
+	public Customer findById (Customer customer) {
+		Customer foundCustomer = null;
+		// Create an EntityManager
+        EntityManager manager = entityManagerFactory.createEntityManager();
+        EntityTransaction transaction = null;
+
+        try {
+            // Get a transaction
+            transaction = manager.getTransaction();
+            // Begin the transaction
+            transaction.begin();
+
+            // Get the Customer object
+            foundCustomer = manager.find (Customer.class, customer.getCustomerId());
+
+            // Commit the transaction
+            transaction.commit();
+            
+        } catch (Exception ex) {
+            // If there are any exceptions, roll back the changes
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            // Print the Exception
+            ex.printStackTrace();
+        } finally {
+            // Close the EntityManager
+            manager.close();
+        }
+        return foundCustomer;
+	}
+	
 	public List<Customer> findAll() {
 
         List<Customer> customerList = null;

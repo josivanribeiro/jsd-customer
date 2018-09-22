@@ -116,6 +116,16 @@ public class CustomerRepositoryTests {
 	}
 	
 	@Test
+	public void testFindByIdCustomer () {
+		PotentialCustomer potentialCustomer = new PotentialCustomer ();
+		potentialCustomer.setCustomerId (2);
+		
+		Customer found = customerRepository.findById (potentialCustomer);
+		assertNotNull (found);
+		assertTrue (found.getCustomerId() > 0);
+	}
+	
+	@Test
 	public void testFindAllCustomer () {
 		List<Customer> customerList = null;
 		

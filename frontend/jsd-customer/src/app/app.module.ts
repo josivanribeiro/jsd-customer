@@ -7,16 +7,20 @@ import { CustomersComponent } from './customers/customers.component';
 import { CustomerService } from './services/customer.service';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
+import { AppRoutingModule } from './app-routing.module';
+import { CustomerComponent } from './customers/customer.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    CustomersComponent
+    CustomersComponent,
+    CustomerComponent
   ],
   imports: [
     BrowserModule,
-    HttpClientModule
+    HttpClientModule,
+    AppRoutingModule
   ],
   providers: [
     CustomerService,

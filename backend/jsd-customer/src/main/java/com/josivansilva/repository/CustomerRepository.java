@@ -24,18 +24,6 @@ public class CustomerRepository {
 	private static final EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory ("josivansilva");
 	
 	/**
-	 * Singleton class by Eager Initialization
-	 */
-	public static CustomerRepository SINGLETON = new CustomerRepository();
-	
-	/**
-	 * Private constructor.
-	 */
-	private CustomerRepository () {
-		
-	}
-	
-	/**
 	 * Inserts a new customer.
 	 * 
 	 * @param customer the customer.

@@ -6,6 +6,8 @@ import static org.junit.Assert.assertTrue;
 
 import java.math.BigDecimal;
 
+import javax.inject.Inject;
+
 import org.junit.Test;
 
 /**
@@ -16,7 +18,8 @@ import org.junit.Test;
  */
 public class CustomerServiceTests {
 
-	private CustomerService customerService = CustomerService.SINGLETON;
+	@Inject
+	private CustomerService customerService;
 	
 	@Test
 	public void testSimulatesLoanWithRiskA () {

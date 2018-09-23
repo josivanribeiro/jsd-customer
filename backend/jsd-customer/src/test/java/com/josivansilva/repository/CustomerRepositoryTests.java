@@ -7,6 +7,7 @@ import static org.junit.Assert.assertTrue;
 import java.math.BigDecimal;
 import java.util.List;
 
+import javax.inject.Inject;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
@@ -28,7 +29,8 @@ public class CustomerRepositoryTests {
 	@SuppressWarnings("unused")
 	private static final EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("josivansilva");
 
-	private CustomerRepository customerRepository = CustomerRepository.SINGLETON; 
+	@Inject
+	private CustomerRepository customerRepository; 
 	
 	@Test
 	public void testInsertSpecialCustomer () {

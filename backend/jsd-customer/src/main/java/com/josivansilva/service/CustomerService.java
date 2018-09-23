@@ -5,6 +5,8 @@ import java.math.BigDecimal;
 import java.math.MathContext;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import com.josivansilva.domain.Customer;
 import com.josivansilva.repository.CustomerRepository;
 import com.josivansilva.util.Constants;
@@ -17,19 +19,8 @@ import com.josivansilva.util.Constants;
  */
 public class CustomerService {
 
-	/**
-	 * Singleton class by Eager Initialization
-	 */
-	public static CustomerService SINGLETON = new CustomerService();
-	
-	private CustomerRepository customerRepository = CustomerRepository.SINGLETON;
-	
-	/**
-	 * Private constructor.
-	 */
-	private CustomerService () {
-		
-	}
+	@Inject
+	private CustomerRepository customerRepository;
 	
 	/**
 	 * Inserts a new customer.

@@ -3,7 +3,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams, HttpResponse}  from '@angular/common/http';
 import {Http, Response, Headers} from "@angular/http";
 import {Customer} from '../customers/customer';
-import 'rxjs/add/operator/map';
+//import 'rxjs/add/operator/map';
 import { map } from 'rxjs/operators';
 
 /**
@@ -17,7 +17,7 @@ export class CustomerService {
     private baseUrl: string;
 
     constructor (private http: HttpClient) {
-        this.baseUrl = "http://localhost:8080/jsd-customer/customers";
+        this.baseUrl = "http://localhost:8080/jsd-customer/rest/customers";
         
     }
 
@@ -25,7 +25,7 @@ export class CustomerService {
     * Gets the Customers. 
     */
     public getCustomers() {
-        return this.http.get<Customer>(this.baseUrl).pipe (map((res:Customer) => res));
+        return this.http.get<Customer[]>(this.baseUrl).pipe (map((res:Customer[]) => res));
     }    
 
     /** 

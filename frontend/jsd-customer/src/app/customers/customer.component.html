@@ -1,3 +1,66 @@
-<p>
-  customer works!
-</p>
+<div class="container" style="padding: 20px;">
+  <h1 class="mb-3">Adicionar Cliente</h1>  
+  <form class="form-horizontal" role="form" novalidate [formGroup]="customerForm">  
+      <div class="form-group" 
+        [ngClass]="{
+        'has-danger': customerName.invalid && (customerName.dirty || customerName.touched),
+        'has-success': customerName.valid && (customerName.dirty || customerName.touched)
+        }">        
+        <label for="contain">Nome *</label>
+        <input class="form-control" type="text" maxlength="255" formControlName="customerName" required trim="blur" [readonly]="isDetails">
+        <div class="form-control-feedback" style="width: 100%; position: relative; text-align:left;" *ngIf="customerName.errors && (customerName.dirty || customerName.touched)">
+            <p *ngIf="customerName.errors.required">É necessário preencher o campo Nome.</p>
+        </div> 
+      </div>
+      <div class="form-group">
+          <label for="contain">Tipo *</label><br/>
+          <ng-container *ngFor="let customerType of customerTypes">
+            <label class="radio-inline"><input type="radio" name="rdCustomerType" (click)="selectCustomerType(customerType.value)" [checked]="customerType.value == selectedCustomerType.value"> {{customerType.description}} </label>&nbsp;
+          </ng-container>
+      </div>
+      <div class="form-group" 
+        [ngClass]="{
+        'has-danger': customerMonthlyIncome.invalid && (customerMonthlyIncome.dirty || customerMonthlyIncome.touched),
+        'has-success': customerMonthlyIncome.valid && (customerMonthlyIncome.dirty || customerMonthlyIncome.touched)
+        }">
+        <label for="contain">Rendimento Mensal *</label>
+        <input class="form-control" type="text" (keyup)="checkRisk(customerMonthlyIncome.value)" formControlName="customerMonthlyIncome" required trim="blur" [readonly]="isDetails">
+        <div class="form-control-feedback" style="width: 100%; position: relative; text-align:left;" *ngIf="customerMonthlyIncome.errors && (customerMonthlyIncome.dirty || customerMonthlyIncome.touched)">
+            <p *ngIf="customerMonthlyIncome.errors.required">É necessário preencher o Rendimento Mensal.</p>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="contain">Risco</label>
+        <input class="form-control" type="text" formControlName="customerRisk" required [readonly]="true">
+      </div>
+      <div class="form-group"
+        [ngClass]="{
+        'has-danger': customerAddress.invalid && (customerAddress.dirty || customerAddress.touched),
+        'has-success': customerAddress.valid && (customerAddress.dirty || customerAddress.touched)
+        }">
+        <label for="contain">Endereço *</label>
+        <input class="form-control" type="text" maxlength="355" formControlName="customerAddress" required trim="blur" [readonly]="isDetails">
+        <div class="form-control-feedback" style="width: 100%; position: relative; text-align:left;" *ngIf="customerMonthlyIncome.errors && (customerMonthlyIncome.dirty || customerMonthlyIncome.touched)">
+            <p *ngIf="customerAddress.errors.required">É necessário preencher o Endereço.</p>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="contain">Total do Patrimônio *</label>
+        <input class="form-control" type="text" formControlName="customerTotalPatrimony" required trim="blur" [readonly]="isDetails">
+      </div>
+      <div class="form-group">
+        <label for="contain">Total de Dívidas *</label>
+        <input class="form-control" type="text" formControlName="customerCurrentDebts" required trim="blur" [readonly]="isDetails">
+      </div>
+      <div class="form-group">
+        <label class="customcheck">
+            <input type="checkbox" formControlName="customerEmployed" required trim="blur" [readonly]="isDetails">
+            <span class="checkmark"></span> Atualmente Empregado *
+        </label>
+      </div>
+      <button type="submit" class="btn btn-primary">
+        <span class="glyphicon glyphicon-search" aria-hidden="true">Salvar</span>
+      </button>
+      <br>
+    </form>
+</div>

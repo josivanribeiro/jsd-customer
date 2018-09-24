@@ -34,6 +34,10 @@ export class CustomerComponent implements OnInit {
   customerCurrentDebts: FormControl;
   customerEmployed: FormControl;
 
+  loanValue: number;
+  parcel: number;
+  calculationResult: number;
+
   customerTypes = [
     new CustomerType ("Special", "Especial"),
     new CustomerType ("Potential", "Potencial"),
@@ -77,6 +81,27 @@ export class CustomerComponent implements OnInit {
     this.customerRisk.setValue("A");
    }
  }
+
+ /** 
+  * Simulates a loan.
+  */
+ public onSimulatesLoan () {
+  
+  console.log ("this.parcel: " + this.parcel);
+  console.log ("this.loanValue: " + this.loanValue);
+  console.log ("this.customerRisk.value: " + this.customerRisk.value);
+
+  if (this.parcel == null
+        || this.loanValue == null
+        || this.customerRisk.value == null) {
+    Functions.createModalAlert (this.modal, 'É necessário preencher o Valor e a Duração do Empréstimo.');
+    return;
+  }
+  
+  this.customerService.simulatesLoan (this.parcel, this.loanValue, this.customerRisk.value).subscribe(data => {
+    this.calculationResult = parseFloat (data.toString());        
+  });
+}
 
  /** 
   * Gets the customer by id.

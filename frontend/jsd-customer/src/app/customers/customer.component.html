@@ -69,6 +69,26 @@
       <button type="submit" class="btn btn-primary" (click)="onUpdateCustomer()" style="cursor: pointer;" *ngIf="isEdit">
           <span class="glyphicon glyphicon-search" aria-hidden="true">Alterar</span>
       </button>
-      <br>
+      <br/>
+    </form>    
+</div>
+<div class="container" *ngIf="isEdit">
+    <h1 class="mb-3">Simulação de Empréstimo</h1>
+    <form class="form-horizontal mb-3" role="form">
+        <div class="form-group">        
+          <label for="contain">Valor do Empréstimo *</label>
+          <input class="form-control" type="text" [(ngModel)]="loanValue" name="loanValue" [ngModelOptions]="{standalone: true}">         
+        </div>
+        <div class="form-group">        
+          <label for="contain">Duração do Empréstimo (meses) *</label>
+          <input class="form-control" type="text" maxlength="3" [(ngModel)]="parcel" name="parcel" [ngModelOptions]="{standalone: true}">
+        </div>
+        <div class="form-group">        
+          <label for="contain">Valor da Prestação</label>
+          <input class="form-control" type="text" [readonly]="true" [(ngModel)]="calculationResult" name="calculationResult" [ngModelOptions]="{standalone: true}">         
+        </div>
+        <button type="submit" class="btn btn-primary" (click)="onSimulatesLoan()" style="cursor: pointer;">
+          <span class="glyphicon glyphicon-search" aria-hidden="true">Calcular</span>
+        </button>        
     </form>
 </div>

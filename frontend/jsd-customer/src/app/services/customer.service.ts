@@ -17,8 +17,7 @@ export class CustomerService {
     private baseUrl: string;
 
     constructor (private http: HttpClient) {
-        this.baseUrl = "http://localhost:8080/jsd-customer/rest/customers";
-        
+        this.baseUrl = "http://localhost:8080/jsd-customer/rest/customers";        
     }
 
     /** 
@@ -60,5 +59,12 @@ export class CustomerService {
         return this.http.put<Response>(this.baseUrl + '/' + customer.customerId, body, {
             headers: new HttpHeaders().set('Content-Type', 'application/json')}).pipe(map((res) => res));
     }
+
+    /** 
+    * Simulates the loan.
+    */
+   public simulatesLoan (parcel, loanValue, customerRisk) {                 
+    return this.http.get<Response> (this.baseUrl + '/simulatesLoan/' + parcel + '/' + loanValue + '/' + customerRisk).pipe(map((res) => res));
+   }
 
 }

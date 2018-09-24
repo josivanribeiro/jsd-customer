@@ -32,7 +32,7 @@ public class CustomerResource {
 	private CustomerService customerService;
 
 	@GET
-	@Path("simulatesLoan/{parcel}/{loanValue}/{customerRisk}")
+	@Path("/simulatesLoan/{parcel}/{loanValue}/{customerRisk}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public BigDecimal simulatesLoan(@PathParam("parcel") int parcel, @PathParam("loanValue") BigDecimal loanValue,
 			@PathParam("customerRisk") Character customerRisk) {

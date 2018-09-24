@@ -16,6 +16,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import com.josivansilva.domain.Customer;
+import com.josivansilva.dto.CustomerDTO;
 import com.josivansilva.service.CustomerService;
 
 /**
@@ -35,54 +36,35 @@ public class CustomerResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public BigDecimal simulatesLoan(@PathParam("parcel") int parcel, @PathParam("loanValue") BigDecimal loanValue,
 			@PathParam("customerRisk") Character customerRisk) {
-
 		System.out.println("operation = simulatesLoan");
-
 		return customerService.simulatesLoan(parcel, loanValue, customerRisk);
 	}
 
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces({ MediaType.APPLICATION_JSON })
-	public boolean insertCustomer(Customer customer) {
-
+	public boolean insertCustomer (CustomerDTO customerDTO) {
 		System.out.println("operation = insert");
-
-		System.out.println("customer.getCustomerName() = " + customer.getCustomerName());
-		System.out.println("customer.getCustomerType() = " + customer.getCustomerType());
-		System.out.println("customer.getCustomerRisk() = " + customer.getCustomerRisk());
-		System.out.println("customer.getCustomerAddress() = " + customer.getCustomerAddress());
-		System.out.println("customer.getCustomerMonthlyIncome() = " + customer.getCustomerMonthlyIncome());
-
-		return customerService.insert(customer);
+		Customer customer = customerDTO.DTOToEntity();
+		return customerService.insert (customer);
 	}
 
 	@PUT
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public boolean updateCustomer(Customer customer) {
-
+	public boolean updateCustomer (CustomerDTO customerDTO) {
 		System.out.println("operation = update");
-
-		System.out.println("customer.getCustomerId() = " + customer.getCustomerId());
-		System.out.println("customer.getCustomerName() = " + customer.getCustomerName());
-		System.out.println("customer.getCustomerType() = " + customer.getCustomerType());
-		System.out.println("customer.getCustomerRisk() = " + customer.getCustomerRisk());
-		System.out.println("customer.getCustomerAddress() = " + customer.getCustomerAddress());
-		System.out.println("customer.getCustomerMonthlyIncome() = " + customer.getCustomerMonthlyIncome());
-
-		return customerService.update(customer);
+		Customer customer = customerDTO.DTOToEntity();
+		return customerService.update (customer);
 	}
 
 	@DELETE
 	@Path("/{customerId}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public boolean deleteCustomer(@PathParam("customerId") int customerId) {
-
+	public boolean deleteCustomer (@PathParam("customerId") int customerId) {
 		System.out.println("operation = delete");
 		System.out.println("customerId = " + customerId);
-
 		Customer customer = new Customer();
 		customer.setCustomerId(customerId);
 		return customerService.delete(customer);
@@ -91,23 +73,18 @@ public class CustomerResource {
 	@GET
 	@Path("/{customerId}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Customer getCustomerById(@PathParam("customerId") int customerId) {
-
+	public Customer getCustomerById (@PathParam("customerId") int customerId) {
 		System.out.println("operation = findById");
 		System.out.println("customerId = " + customerId);
-
 		Customer customer = new Customer();
 		customer.setCustomerId(customerId);
-
 		return customerService.findById(customer);
 	}
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Customer> getCustomers() {
-
 		System.out.println("operation = findAll");
-		
 		return customerService.findAll();
 	}
 

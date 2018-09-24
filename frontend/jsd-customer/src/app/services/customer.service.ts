@@ -33,9 +33,9 @@ export class CustomerService {
     */
     public insertCustomer (customer) {                 
         let body = JSON.stringify(customer);
-        return this.http.post<HttpResponse<any>>(this.baseUrl + '/', body, {
+        return this.http.post<Response>(this.baseUrl + '/', body, {
             headers: new HttpHeaders().set('Content-Type', 'application/json'), observe:'response'
-        }).pipe(map((res: HttpResponse<any>) => res));
+        }).pipe(map((res) => res));
     }
 
     /** 

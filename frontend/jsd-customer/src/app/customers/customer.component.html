@@ -15,7 +15,7 @@
       <div class="form-group">
           <label for="contain">Tipo *</label><br/>
           <ng-container *ngFor="let customerType of customerTypes">
-            <label class="radio-inline"><input type="radio" name="rdCustomerType" (click)="selectCustomerType(customerType.value)" [checked]="customerType.value == selectedCustomerType.value"> {{customerType.description}} </label>&nbsp;
+            <label class="radio-inline"><input type="radio" name="customerType" formControlName="customerType" value="{{customerType.value}}" (click)="selectCustomerType(customerType.value)" [checked]="customerType.value == selectedCustomerType.value"> {{customerType.description}} </label>&nbsp;
           </ng-container>
       </div>
       <div class="form-group" 
@@ -58,7 +58,7 @@
             <span class="checkmark"></span> Atualmente Empregado *
         </label>
       </div>
-      <button type="submit" class="btn btn-primary">
+      <button type="submit" class="btn btn-primary" (click)="onInsertCustomer()" style="cursor: pointer;">
         <span class="glyphicon glyphicon-search" aria-hidden="true">Salvar</span>
       </button>
       <br>

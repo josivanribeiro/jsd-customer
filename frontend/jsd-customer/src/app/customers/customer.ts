@@ -6,7 +6,7 @@
  * @author josivan@josivansilva.com
  *
  */
-export interface Customer {
+export class Customer {
     customerId: number;
     customerType: string;
     customerName: string;

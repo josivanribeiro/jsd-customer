@@ -23,4 +23,11 @@ public class Constants {
 	public static Character RISK_B = 'B';
 	public static Character RISK_C = 'C';
 	
+	/**
+	 * Customer types
+	 */
+	public static String CUSTOMER_TYPE_SPECIAL = "Special";
+	public static String CUSTOMER_TYPE_POTENTIAL = "Potential";
+	public static String CUSTOMER_TYPE_COMMON = "Common";
+	
 }

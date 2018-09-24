@@ -50,13 +50,17 @@ export class CustomerComponent implements OnInit {
     this.createForm();
   }
 
+  /** 
+  * Checks the risks.
+  */
  public checkRisk (value) {
-   
-
    if (value <= 2000) {
-     this.customerRisk.setValue("C");
+    this.customerRisk.setValue("C");
+   } else if (value > 2000 && value <= 8000) {
+    this.customerRisk.setValue("B");
+   } else if (value > 8000) {
+    this.customerRisk.setValue("A");
    }
-
  }
 
   /** 

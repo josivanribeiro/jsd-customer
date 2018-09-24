@@ -61,7 +61,7 @@ export class CustomerComponent implements OnInit {
 
     this.subscribe = this.activatedRoute.params.subscribe(params => {
       this.customerId = params['id'];      
-      //this.getApontamentoById (this.customerId);      
+      this.getCustomerById (this.customerId);      
     });
 
   }
@@ -78,6 +78,23 @@ export class CustomerComponent implements OnInit {
     this.customerRisk.setValue("A");
    }
  }
+
+ /** 
+  * Gets the customer by id.
+  */
+ private getCustomerById (id) {
+  this.customerService.getCustomerById(id).subscribe(data => {
+    this.customerId = data.customerId.toString();
+    this.customerName.setValue (data.customerName);
+    this.customerType.setValue (data.customerType);
+    this.customerMonthlyIncome.setValue (data.customerMonthlyIncome);
+    this.customerAddress.setValue (data.customerAddress);
+    this.customerRisk.setValue (data.customerRisk);
+    this.customerTotalPatrimony.setValue (data.customerTotalPatrimony);
+    this.customerCurrentDebts.setValue (data.customerCurrentDebts);
+    this.customerEmployed.setValue (data.customerEmployed);
+  });
+}
 
  /** 
   * Calling event for customer insertion.

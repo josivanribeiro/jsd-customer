@@ -49,7 +49,7 @@ export class CustomerService {
     * Deletes the Customer by id.
     */
     public deleteCustomer (id) {                 
-        return this.http.delete<HttpResponse<any>>(this.baseUrl + '/' + id, {observe:'response'}).pipe(map((res:HttpResponse<any>) => res));
+        return this.http.delete<Response>(this.baseUrl + '/' + id).pipe(map((res) => res));
     }
 
     /** 

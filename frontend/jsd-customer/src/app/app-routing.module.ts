@@ -18,22 +18,11 @@ const routes: Routes = [
           },
           {
             path: "details/:id",
-            children: [
-              {
-                path: "",
-                component: CustomerComponent,
-                data: {
-                  breadcrumb: ""
-                }
-              },
-              {
-                path: "edit/:id",
-                component: CustomerComponent,
-                data: {
-                  breadcrumb: "Alterar"
-                }
-              }
-            ]
+            component: CustomerComponent
+          },
+          {
+            path: "edit/:id",
+            component: CustomerComponent            
           }
         ]
     },

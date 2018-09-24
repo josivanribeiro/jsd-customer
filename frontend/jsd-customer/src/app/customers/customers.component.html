@@ -23,7 +23,7 @@
                   <th>Tipo Cliente</th>
                   <th>Rendimento Mensal</th>
                   <th>Risco</th>
-                  <th><em class="fa fa-cog"></em></th>                  
+                  <th class="text-center"><em class="fa fa-cog"></em></th>                  
                 </tr> 
               </thead>
               <tbody>
@@ -45,7 +45,7 @@
                     <td>{{customer.customerRisk}}</td>
                     <td align="center">
                         <a class="btn btn-default"><em class="fa fa-pencil"></em></a>
-                        <a class="btn btn-danger"><em class="fa fa-trash"></em></a>
+                        <a class="btn btn-danger" style="cursor: pointer;" (click)="onDeleteCustomer(customer.customerId)"><em class="fa fa-trash"></em></a>
                     </td>
                   </tr>
               </tbody>

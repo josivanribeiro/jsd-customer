@@ -35,8 +35,7 @@ export class CustomersComponent implements OnInit {
 
   public findAll () {    
     this.customerService.getCustomers().subscribe(data => {
-      this.customers = data;
-      console.log (data);      
+      this.customers = data;         
     });    
   } 
 

@@ -55,12 +55,10 @@ export class CustomerService {
     /** 
     * Updates the Customer.
     */
-    public updateCustomer (customer) {                 
+    public updateCustomer (customer: Customer) {                 
         let body = JSON.stringify(customer);
-        let id = (<Customer>customer).customerId;
-        return this.http.put<HttpResponse<any>>(this.baseUrl + '/' + id, body, {
-            headers: new HttpHeaders().set('Content-Type', 'application/json'), observe:'response'
-        }).pipe(map((res: HttpResponse<any>) => res));
+        return this.http.put<Response>(this.baseUrl + '/' + customer.customerId, body, {
+            headers: new HttpHeaders().set('Content-Type', 'application/json')}).pipe(map((res) => res));
     }
 
 }

@@ -43,7 +43,6 @@ export class CustomerComponent implements OnInit {
 
   /* Edit mode attributes */
   isAdd: boolean = false;
-  isDetails: boolean = false;
   isEdit: boolean = false;
 
   subscribe: any;
@@ -93,6 +92,7 @@ export class CustomerComponent implements OnInit {
     this.customerTotalPatrimony.setValue (data.customerTotalPatrimony);
     this.customerCurrentDebts.setValue (data.customerCurrentDebts);
     this.customerEmployed.setValue (data.customerEmployed);
+    this.selectedCustomerType.value = data.customerType;
   });
 }
 
@@ -157,6 +157,69 @@ public insertCustomer() {
   });
 }
 
+ /** 
+  * Calling event for Customer update.
+  */
+ public onUpdateCustomer() {
+  const dialogRef = this.modal.confirm()
+      .size('sm')
+      .showClose(true)
+      .keyboard(27)
+      .headerClass('modal-header-blue')
+      .title('Alterar registro?')
+      .okBtn('Alterar')
+      .cancelBtn('Cancelar')
+      .open();
+
+  dialogRef.result
+      .then( 
+        result => this.updateCustomer()          
+      );
+}
+ 
+ /** 
+  * Updates a Customer.
+  */
+ public updateCustomer() {
+  
+  console.log ('this.customerName.valid ' + this.customerName.valid);
+  console.log ('this.customerType.valid ' + this.customerType.valid);
+  console.log ('this.customerMonthlyIncome.valid ' + this.customerMonthlyIncome.valid);
+  console.log ('this.customerRisk.valid ' + this.customerRisk.valid);
+  console.log ('this.customerAddress.valid ' + this.customerAddress.valid);
+  console.log ('this.customerType.value:' + this.customerType.value);
+  console.log ('this.customerTotalPatrimony.valid:' + this.customerTotalPatrimony.valid);
+  console.log ('this.customerCurrentDebts.valid:' + this.customerCurrentDebts.valid);
+  console.log ('this.customerEmployed.valid:' + this.customerEmployed.valid);
+  
+  if (this.customerForm.invalid) {
+    Functions.createModalAlert (this.modal, 'É necessário preencher todos os campos.');
+    return;
+  }    
+  let customer = new Customer();
+  customer.customerId = parseInt (this.customerId);
+  customer.customerName = this.customerName.value;
+  customer.customerType = this.selectedCustomerType.value;
+  customer.customerMonthlyIncome = this.customerMonthlyIncome.value;
+  customer.customerRisk = this.customerRisk.value;
+  customer.customerAddress = this.customerAddress.value;
+  customer.customerTotalPatrimony = this.customerTotalPatrimony.value;
+  customer.customerCurrentDebts = this.customerCurrentDebts.value;
+  customer.customerEmployed = this.customerEmployed.value;    
+  
+  this.customerService.updateCustomer(customer).subscribe(data => {      
+    if (data != null) {
+      if (data.toString() == "true") {          
+        Functions.createModalSuccess (this.modal, 'Cliente alterado com sucesso.');
+        this.router.navigate([Constants.CUSTOMERS_LIST_PATH]);
+      } else if (data.toString() == "false") {
+        Functions.createModalError(this.modal, 'Ocorreu um erro na alteração do Cliente.');
+      }
+    }      
+  });
+}
+
+
   /** 
   * Creates the form controls.
   */
@@ -166,9 +229,9 @@ public insertCustomer() {
   this.customerMonthlyIncome = new FormControl('', Validators.required);
   this.customerRisk = new FormControl('', Validators.required);
   this.customerAddress = new FormControl('', Validators.required);
-  this.customerTotalPatrimony = new FormControl(null);
-  this.customerCurrentDebts = new FormControl(null);
-  this.customerEmployed = new FormControl(null);  
+  this.customerTotalPatrimony = new FormControl();
+  this.customerCurrentDebts = new FormControl();
+  this.customerEmployed = new FormControl();  
  }
 
 /** 
@@ -199,11 +262,11 @@ private createForm() {
   */
  private setEditMode () {    
   if (Functions.urlContainsPathByRegex(Constants.CUSTOMERS_EDIT_PATH_REGEX)) {
-    this.isEdit = true;      
-  } else if (Functions.urlContainsPathByRegex(Constants.CUSTOMERS_DETAILS_PATH_REGEX)) {
-    this.isDetails = true;      
+    this.isEdit = true;
+    console.log ("isEdit");
   } else if (Functions.urlContainsPath(Constants.CUSTOMERS_ADD_PATH)) {
     this.isAdd = true;
+    console.log ("isAdd");
   }
 }
 

@@ -50,9 +50,9 @@ public class CustomerResource {
 	}
 
 	@PUT
-	@Consumes(MediaType.APPLICATION_JSON)
-	@Produces(MediaType.APPLICATION_JSON)
-	public boolean updateCustomer (CustomerDTO customerDTO) {
+	@Path("/{customerId}")
+    @Produces(MediaType.APPLICATION_JSON)
+	public boolean updateCustomer (@PathParam("customerId") int customerId, CustomerDTO customerDTO) {
 		System.out.println("operation = update");
 		Customer customer = customerDTO.DTOToEntity();
 		return customerService.update (customer);
